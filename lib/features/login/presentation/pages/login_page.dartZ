@@ -1,0 +1,111 @@
+import 'package:flutter/material.dart';
+
+class LoginPage extends StatefulWidget {
+  static const routeName = '/login';
+  const LoginPage({super.key});
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String _pin = "";
+
+  // Function to handle PIN input
+  void _handlePinInput(String digit) {
+    setState(() {
+      if (_pin.length < 4) {
+        _pin += digit;
+      }
+    });
+  }
+
+  // Function to clear PIN
+  void _clearPin() {
+    setState(() {
+      _pin = "";
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('PIN Input'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Masked PIN display
+            Text(
+              _pin.replaceAll(RegExp(r'.'), '*'),
+              style: const TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 16),
+            // PIN digits keypad
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildDigitButton("1"),
+                _buildDigitButton("2"),
+                _buildDigitButton("3"),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildDigitButton("4"),
+                _buildDigitButton("5"),
+                _buildDigitButton("6"),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildDigitButton("7"),
+                _buildDigitButton("8"),
+                _buildDigitButton("9"),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildEmptyButton(),
+                _buildDigitButton("0"),
+                _buildClearButton(),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Helper function to build digit buttons
+  Widget _buildDigitButton(String digit) {
+    return ElevatedButton(
+      onPressed: () => _handlePinInput(digit),
+      child: Text(digit),
+    );
+  }
+
+  // Helper function to build empty button
+  Widget _buildEmptyButton() {
+    return const ElevatedButton(
+      onPressed: null,
+      child: Text(""),
+    );
+  }
+
+  // Helper function to build clear button
+  Widget _buildClearButton() {
+    return ElevatedButton(
+      onPressed: () => _clearPin(),
+      child: const Icon(Icons.backspace),
+    );
+  }
+}
