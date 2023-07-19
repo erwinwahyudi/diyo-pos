@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:diyo_pos/features/login/data/datasources/auth_datasource.dart';
+import 'package:diyo_pos/features/login/data/datasources/local_datasources/auth_local_datasource.dart';
 import 'package:dartz/dartz.dart';
 
 class AuthRepository {

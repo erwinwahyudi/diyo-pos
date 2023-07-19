@@ -1,4 +1,4 @@
-import 'package:diyo_pos/features/home/data/models/menu_model.dart';
+import 'package:diyo_pos/features/order/data/models/menu_model.dart';
 
 class OrderItem {
   final Menu menu;

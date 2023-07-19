@@ -1,5 +1,5 @@
 import 'order_item_model.dart';
-import 'table_model.dart';
+import '../../../home/data/models/table_model.dart';
 
 class Order {
   final Table table;

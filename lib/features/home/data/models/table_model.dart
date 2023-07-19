@@ -20,4 +20,12 @@ class Table {
       status: json['status'],
     );
   }
+
+  Table copyWith({String? name, String? status}) {
+    return Table(
+      id: id,
+      name: name ?? this.name,
+      status: status ?? this.status,
+    );
+  }
 }
