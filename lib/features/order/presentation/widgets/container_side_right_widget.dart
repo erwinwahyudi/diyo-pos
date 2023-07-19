@@ -1,10 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:diyo_pos/features/home/presentation/bloc/detail_table/detail_table_bloc.dart';
-import 'package:diyo_pos/features/home/presentation/bloc/home/home_bloc.dart';
-import 'package:diyo_pos/features/order/presentation/pages/order_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class ContainerSideRight extends StatelessWidget {
   final String tableName;
@@ -52,30 +47,16 @@ class ContainerSideRight extends StatelessWidget {
 
   Column dynamicSectionForButtonOrder(
       int id, String status, BuildContext context) {
-    if (status == 'available') {
-      return Column(
-        children: [
-          ElevatedButton(
-              onPressed: () {
-                context.read<HomeBloc>().add(PrintQR(id: tableId));
-                context.read<DetailTableBloc>().add(ChangeStatusTable(id: id));
-              },
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red, foregroundColor: Colors.white),
-              child: const Text('Print QR')),
-        ],
-      );
-    }
     if (status == 'seated') {
       return Column(
         children: [
           ElevatedButton(
               onPressed: () {
-                context.go('${OrderPage.routeName}/$id');
+                // context.go('${OrderPage.routeName}/$id');
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red, foregroundColor: Colors.white),
-              child: const Text('Make An Order')),
+              child: const Text('Add Order')),
         ],
       );
     }

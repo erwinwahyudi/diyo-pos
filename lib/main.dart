@@ -7,6 +7,10 @@ import 'package:diyo_pos/features/login/bloc/login_bloc.dart';
 import 'package:diyo_pos/features/login/data/datasources/local_datasources/auth_local_datasource.dart';
 import 'package:diyo_pos/features/login/data/respositories/auth_repository.dart';
 import 'package:diyo_pos/features/login/presentation/pages/login_page.dart';
+import 'package:diyo_pos/features/order/data/datasources/menu_local_datasource.dart';
+import 'package:diyo_pos/features/order/data/repositories/menu_repository.dart';
+import 'package:diyo_pos/features/order/presentation/bloc/order_menu/order_menu_bloc.dart';
+import 'package:diyo_pos/features/order/presentation/pages/order_page.dart';
 import 'package:diyo_pos/routing/router_middleware.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +35,12 @@ class MyApp extends StatelessWidget {
                   tableLocalDataSource: TableLocalDataSource()))),
           BlocProvider(
               create: (context) => DetailTableBloc(TableRepository(
-                  tableLocalDataSource: TableLocalDataSource())))
+                  tableLocalDataSource: TableLocalDataSource()))),
+          BlocProvider(
+              create: (context) => OrderMenuBloc(
+                  MenuRepository(menuLocalDataSource: MenuLocalDataSource()),
+                  TableRepository(
+                      tableLocalDataSource: TableLocalDataSource()))),
         ],
         child: SafeArea(
           child: MaterialApp.router(
@@ -49,6 +58,12 @@ class MyApp extends StatelessWidget {
               GoRoute(
                 path: HomePage.routeName,
                 builder: (context, state) => const HomePage(),
+                redirect: authMiddleware,
+              ),
+              GoRoute(
+                path: '${OrderPage.routeName}/:tableId',
+                builder: (context, state) =>
+                    OrderPage(id: int.parse(state.pathParameters['tableId']!)),
                 redirect: authMiddleware,
               )
             ]),
