@@ -1,16 +1,21 @@
-# diyo_pos
+# DIYO POS USING BLOC
+> Version 0.0.1
 
-A new Flutter project.
+POS Application using BLOC and shared_preferences to save data on local.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Login
+<img src="ScreenShoot/images/login.png">
 
-A few resources to get you started if this is your first Flutter project:
+## Drawer Menu
+<img src="ScreenShoot/images/drawer-menu.png">
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Home
+<img src="ScreenShoot/images/home-table.png">
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Order Menu
+<img src="ScreenShoot/images/order-menu.png">
+
+## Responsive
+<img src="ScreenShoot/images/respoonsive-table.png">
+<img src="ScreenShoot/images/respoonsive-table.png">

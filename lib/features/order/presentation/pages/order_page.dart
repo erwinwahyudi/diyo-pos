@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:diyo_pos/features/home/presentation/bloc/detail_table/detail_table_bloc.dart';
 import 'package:diyo_pos/features/order/presentation/widgets/container_side_right_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +23,7 @@ class _OrderPageState extends State<OrderPage> {
   void initState() {
     super.initState();
     context.read<OrderMenuBloc>().add(LoadMenuData());
-    context.read<DetailTableBloc>().add(ShowDetailTable(id: widget.id));
+    context.read<OrderMenuBloc>().add(GetTableData(id: widget.id));
   }
 
   @override
@@ -42,11 +41,11 @@ class _OrderPageState extends State<OrderPage> {
                   color: Colors.white,
                   child: Center(
                     child: BlocBuilder<OrderMenuBloc, OrderMenuState>(
+                      buildWhen: (previous, current) {
+                        return current is OrderMenuLoaded;
+                      },
                       builder: (context, state) {
                         if (state is OrderMenuLoaded) {
-                          context
-                              .read<OrderMenuBloc>()
-                              .add(GetTableData(id: widget.id));
                           return GridView.builder(
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
@@ -57,13 +56,7 @@ class _OrderPageState extends State<OrderPage> {
                               itemCount: state.menuList.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
-                                  onTap: () {
-                                    // context
-                                    // .read<DetailTableBloc>()
-                                    // .add(ShowDetailTable(
-                                    //   id: state.tableList[index].id,
-                                    // ));
-                                  },
+                                  onTap: () {},
                                   child: Container(
                                       height: 80,
                                       width: 80,
@@ -90,16 +83,19 @@ class _OrderPageState extends State<OrderPage> {
                   )));
 
           Widget rightColumn = Expanded(
-            child: BlocBuilder<DetailTableBloc, DetailTableState>(
+            child: BlocBuilder<OrderMenuBloc, OrderMenuState>(
+              buildWhen: (previous, current) {
+                return current is TableDataLoaded;
+              },
               builder: (context, state) {
-                if (state is DetailTableLoading) {
+                if (state is OrderMenuLoading) {
                   return const Center(
                     child: CircularProgressIndicator(
                       color: Colors.grey,
                     ),
                   );
                 }
-                if (state is DetailTableLoaded) {
+                if (state is TableDataLoaded) {
                   return ContainerSideRight(
                     tableName: state.table.name,
                     tableId: state.table.id,
