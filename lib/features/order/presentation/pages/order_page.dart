@@ -42,7 +42,8 @@ class _OrderPageState extends State<OrderPage> {
                   child: Center(
                     child: BlocBuilder<OrderMenuBloc, OrderMenuState>(
                       buildWhen: (previous, current) {
-                        return current is OrderMenuLoaded;
+                        return previous != current &&
+                            current is OrderMenuLoaded;
                       },
                       builder: (context, state) {
                         if (state is OrderMenuLoaded) {
@@ -85,7 +86,7 @@ class _OrderPageState extends State<OrderPage> {
           Widget rightColumn = Expanded(
             child: BlocBuilder<OrderMenuBloc, OrderMenuState>(
               buildWhen: (previous, current) {
-                return current is TableDataLoaded;
+                return previous != current && current is TableDataLoaded;
               },
               builder: (context, state) {
                 if (state is OrderMenuLoading) {

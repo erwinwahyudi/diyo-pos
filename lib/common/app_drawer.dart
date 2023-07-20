@@ -1,3 +1,4 @@
+import 'package:diyo_pos/features/home/presentation/pages/home_page.dart';
 import 'package:diyo_pos/features/login/bloc/login_bloc.dart';
 import 'package:diyo_pos/features/login/presentation/pages/login_page.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,9 @@ class AppDrawer extends StatelessWidget {
         _drawerItem(
             icon: Icons.home,
             text: 'Home',
-            onTap: () => debugPrint('Tap My Files')),
+            onTap: ()  {
+              context.go(HomePage.routeName);
+            }),
         // drawer with icon checklist
         _drawerItem(icon: Icons.checklist, text: 'Order Queue', onTap: () {}),
 
